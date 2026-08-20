@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor Dashboard</title>
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <h2>Mentor Dashboard</h2>
+
+    <div>
+      <button id="themeToggle">🌙</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+
+  </header>
+
+  <section class="content">
+
+    <h3 id="welcome"></h3>
+
+    <!-- ================= TAB BAR ================= -->
+
+    <div class="tab-bar">
+
+      <div class="tab active" onclick="showTab('domainsTab', this)">
+        Domains
+      </div>
+
+      <div class="tab" onclick="showTab('myProjectsTab', this)">
+        My Projects
+      </div>
+
+      <div class="tab" onclick="showTab('requestsTab', this)">
+        Requests
+      </div>
+
+      <div class="tab" onclick="showTab('notifyTab', this)">
+        Notifications
+        <span id="mentorNotifyCount"></span>
+      </div>
+
+    </div>
+
+    <!-- ================= DOMAINS TAB ================= -->
+
+    <div id="domainsTab" class="tabContent">
+
+      <div class="tab-wrapper">
+
+        <h4>Select Domain to Add Project</h4>
+
+        <div class="domains">
+
+          <!-- FRONTEND -->
+
+          <div class="card">
+
+            <h4>Frontend</h4>
+
+            <p>
+              HTML, CSS, JS, React
+            </p>
+
+            <button class="btn" onclick="goToAddProject('frontend')">
+              Add Idea
+            </button>
+
+          </div>
+
+          <!-- BACKEND -->
+
+          <div class="card">
+
+            <h4>Backend</h4>
+
+            <p>
+              Node, PHP, APIs
+            </p>
+
+            <button class="btn" onclick="goToAddProject('backend')">
+              Add Idea
+            </button>
+
+          </div>
+
+          <!-- FULL STACK -->
+
+          <div class="card">
+
+            <h4>Full Stack</h4>
+
+            <p>
+              Frontend + Backend
+            </p>
+
+            <button class="btn" onclick="goToAddProject('fullstack')">
+              Add Idea
+            </button>
+
+          </div>
+
+          <!-- AI / ML -->
+
+          <div class="card">
+
+            <h4>AI / ML</h4>
+
+            <p>
+              Machine Learning
+            </p>
+
+            <button class="btn" onclick="goToAddProject('aiml')">
+              Add Idea
+            </button>
+
+          </div>
+
+          <!-- DATA SCIENCE -->
+
+          <div class="card">
+
+            <h4>Data Science</h4>
+
+            <p>
+              Data analysis
+            </p>
+
+            <button class="btn" onclick="goToAddProject('datascience')">
+              Add Idea
+            </button>
+
+          </div>
+
+          <!-- IOT -->
+
+          <div class="card">
+
+            <h4>IoT</h4>
+
+            <p>
+              Hardware projects
+            </p>
+
+            <button class="btn" onclick="goToAddProject('iot')">
+              Add Idea
+            </button>
+
+          </div>
+
+          <!-- DEVOPS -->
+
+          <div class="card">
+
+            <h4>DevOps</h4>
+
+            <p>
+              CI/CD, Docker
+            </p>
+
+            <button class="btn" onclick="goToAddProject('devops')">
+              Add Idea
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= MY PROJECTS TAB ================= -->
+
+    <div id="myProjectsTab" class="tabContent" style="display:none;">
+
+      <div class="tab-wrapper">
+
+        <h4>My Projects</h4>
+
+        <div id="myProjectsContainer" class="domains">
+
+          <p>Loading projects...</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= REQUESTS TAB ================= -->
+
+    <div id="requestsTab" class="tabContent" style="display:none;">
+
+      <div class="tab-wrapper">
+
+        <h4>Student Requests</h4>
+
+        <div id="requestContainer" class="domains"></div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= NOTIFICATIONS TAB ================= -->
+
+    <div id="notifyTab" class="tabContent" style="display:none;">
+
+      <div class="tab-wrapper">
+
+        <h4>Notifications</h4>
+        <span id="mentorNotifyCount"></span>
+
+        <div id="mentorNotifyBox" class="domains"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SCRIPTS ================= -->
+
+  <script src="../js/mentor.js"></script>
+  <script src="../js/theme.js"></script>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <p>
+      © 2026 MentorHub
+    </p>
+
+  </footer>
+
+</body>
+
+</html>

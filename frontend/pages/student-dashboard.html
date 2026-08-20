@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Student Dashboard</title>
+
+  <link
+    rel="stylesheet"
+    href="../css/dashboard.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/style.css"
+  >
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <h2>
+    Student Dashboard
+  </h2>
+
+  <div>
+
+    <button id="themeToggle">
+      🌙
+    </button>
+
+    <button id="logoutBtn">
+      Logout
+    </button>
+
+  </div>
+
+</header>
+
+<section class="content">
+
+  <h3 id="welcome"></h3>
+
+  <!-- ================= TAB BAR ================= -->
+
+  <div class="tab-bar">
+
+    <!-- DOMAINS -->
+
+    <div
+      class="tab active"
+      onclick="showTab('domainsTab', this)"
+    >
+      Domains
+    </div>
+
+    <!-- MY REQUESTS -->
+
+    <div
+      class="tab"
+      onclick="showTab('requestsTab', this)"
+    >
+      My Requests
+    </div>
+
+    <!-- NOTIFICATIONS -->
+
+    <div
+      class="tab"
+      onclick="showTab('notifyTab', this)"
+    >
+      Notifications
+      <span id="notifyCount"></span>
+    </div>
+
+  </div>
+
+  <!-- ================= DOMAINS TAB ================= -->
+
+  <div
+    id="domainsTab"
+    class="tabContent"
+  >
+
+    <div class="tab-wrapper">
+
+      <h4>
+        Select a Domain to view projects
+      </h4>
+
+      <div class="domains">
+
+        <!-- FRONTEND -->
+
+        <div class="card">
+
+          <h4>
+            Frontend
+          </h4>
+
+          <p>
+            HTML, CSS, JS, React
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('frontend')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+        <!-- BACKEND -->
+
+        <div class="card">
+
+          <h4>
+            Backend
+          </h4>
+
+          <p>
+            Node, PHP, APIs
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('backend')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+        <!-- FULL STACK -->
+
+        <div class="card">
+
+          <h4>
+            Full Stack
+          </h4>
+
+          <p>
+            Frontend + Backend
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('fullstack')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+        <!-- AI / ML -->
+
+        <div class="card">
+
+          <h4>
+            AI / ML
+          </h4>
+
+          <p>
+            Machine Learning
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('aiml')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+        <!-- DATA SCIENCE -->
+
+        <div class="card">
+
+          <h4>
+            Data Science
+          </h4>
+
+          <p>
+            Data analysis
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('datascience')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+        <!-- IOT -->
+
+        <div class="card">
+
+          <h4>
+            IoT
+          </h4>
+
+          <p>
+            Hardware projects
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('iot')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+        <!-- DEVOPS -->
+
+        <div class="card">
+
+          <h4>
+            DevOps
+          </h4>
+
+          <p>
+            CI/CD, Docker
+          </p>
+
+          <button
+            class="btn"
+            onclick="goToProjects('devops')"
+          >
+            View Ideas
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= MY REQUESTS TAB ================= -->
+
+  <div
+    id="requestsTab"
+    class="tabContent"
+    style="display:none;"
+  >
+
+    <div class="tab-wrapper">
+
+      <h4>
+        My Mentor Requests
+      </h4>
+
+      <div
+        id="studentRequestBox"
+        class="domains"
+      >
+
+        <p>
+          Loading requests...
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= NOTIFICATIONS TAB ================= -->
+
+  <div
+    id="notifyTab"
+    class="tabContent"
+    style="display:none;"
+  >
+
+    <div class="tab-wrapper">
+
+      <h4>
+        Your Notifications
+      </h4>
+      <span id="notifyCount"></span>
+
+      <div
+        id="studentNotifyBox"
+        class="domains"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="../js/dashboard.js"></script>
+
+<script src="../js/theme.js"></script>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <p>
+    © 2026 MentorHub
+  </p>
+
+</footer>
+
+</body>
+
+</html>

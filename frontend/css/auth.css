@@ -1,0 +1,162 @@
+/* -------- RESET -------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #eef2ff;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------- CONTAINER -------- */
+.signup-container {
+  width: 380px;
+  margin: 70px auto;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+/* -------- HEADING -------- */
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* -------- LABEL + INPUT -------- */
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #334155;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+/* -------- BUTTON -------- */
+button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  background: #1e3a8a;
+}
+
+/* -------- ALREADY HAVE ACCOUNT -------- */
+.link {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.link a {
+  text-decoration: none;
+  color: #2563eb;
+}
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  resize: none;
+}
+
+
+.google-btn{
+  width:100%;
+  padding:12px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:12px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color:#444;
+  transition:0.2s ease;
+}
+
+.google-btn:hover{
+  background:#f5f5f5;
+  border-color:#ccc;
+}
+
+.google-btn img{
+  width:18px;
+}
+
+
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.password-box i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+}
+
+.password-box i:hover {
+  color: #000;
+}
+
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0f172a;
+  color: white;
+  margin-top: auto;
+}
+
+/* Remove browser default password reveal icons */
+
+/* Edge / IE */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Chrome / Safari */
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none;
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Add Project</title>
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <h2>Mentor Dashboard</h2>
+
+  <div>
+    <button onclick="goBack()" class="btn">
+      Back
+    </button>
+  </div>
+</header>
+
+
+<section class="content">
+
+  <div class="form-box">
+
+    <h3>Add Project Idea</h3>
+
+    <form id="projectForm" class="project-form">
+
+      <!-- DOMAIN -->
+
+      <label for="domain">
+        Domain
+      </label>
+
+      <select id="domain" required>
+        <option value="frontend">Frontend</option>
+        <option value="backend">Backend</option>
+        <option value="fullstack">Full Stack</option>
+        <option value="aiml">AI / ML</option>
+        <option value="datascience">Data Science</option>
+        <option value="iot">IoT</option>
+        <option value="devops">DevOps</option>
+      </select>
+
+
+      <!-- PROJECT TITLE -->
+
+      <label for="title">
+        Project Title
+      </label>
+
+      <input
+        type="text"
+        id="title"
+        placeholder="Enter project title"
+        required
+      >
+
+
+      <!-- DESCRIPTION -->
+
+      <label for="description">
+        Description
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Explain your project"
+        required
+      ></textarea>
+
+
+      <!-- DIFFICULTY -->
+
+      <label for="difficulty">
+        Difficulty
+      </label>
+
+      <select id="difficulty" required>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+
+
+      <!-- PROJECT TYPE -->
+
+      <label for="projectType">
+        Project Type
+      </label>
+
+      <select id="projectType" required>
+        <option value="">
+          Select Project Type
+        </option>
+
+        <option value="individual">
+          Individual
+        </option>
+
+        <option value="group">
+          Group
+        </option>
+      </select>
+
+
+      <!-- MAXIMUM MEMBERS -->
+
+      <div
+        id="maxMembersBox"
+        style="display: none;"
+      >
+
+        <label for="maxMembers">
+          Maximum Members
+        </label>
+
+        <input
+          type="number"
+          id="maxMembers"
+          min="2"
+          max="10"
+          value="2"
+          placeholder="Enter maximum members"
+        >
+
+      </div>
+
+
+      <!-- CONTACT EMAIL -->
+
+      <label for="contact">
+        Contact Email
+      </label>
+
+      <input
+        type="email"
+        id="contact"
+        placeholder="mentor@email.com"
+        required
+      >
+
+
+      <!-- SAVE -->
+
+      <button
+        type="submit"
+        class="btn save-btn"
+      >
+        Save Project
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- PROJECT JAVASCRIPT -->
+
+<script src="../js/projects.js"></script>
+
+
+<!-- PROJECT TYPE LOGIC -->
+
+<script>
+
+const projectType =
+  document.getElementById("projectType");
+
+const maxMembersBox =
+  document.getElementById("maxMembersBox");
+
+const maxMembers =
+  document.getElementById("maxMembers");
+
+
+// ======================================================
+// INITIAL STATE
+// ======================================================
+
+if (projectType) {
+
+  maxMembers.disabled = true;
+
+  maxMembers.required = false;
+
+
+  // ====================================================
+  // PROJECT TYPE CHANGE
+  // ====================================================
+
+  projectType.addEventListener("change", () => {
+
+
+    // ==================================================
+    // GROUP PROJECT
+    // ==================================================
+
+    if (projectType.value === "group") {
+
+      maxMembersBox.style.display = "block";
+
+      maxMembers.disabled = false;
+
+      maxMembers.required = true;
+
+
+      if (
+        !maxMembers.value ||
+        Number(maxMembers.value) < 2
+      ) {
+        maxMembers.value = 2;
+      }
+
+    }
+
+
+    // ==================================================
+    // INDIVIDUAL PROJECT
+    // ==================================================
+
+    else if (
+      projectType.value === "individual"
+    ) {
+
+      maxMembersBox.style.display = "none";
+
+      maxMembers.disabled = true;
+
+      maxMembers.required = false;
+
+      maxMembers.value = 1;
+
+    }
+
+
+    // ==================================================
+    // NOTHING SELECTED
+    // ==================================================
+
+    else {
+
+      maxMembersBox.style.display = "none";
+
+      maxMembers.disabled = true;
+
+      maxMembers.required = false;
+
+      maxMembers.value = "";
+
+    }
+
+  });
+
+}
+
+
+// ======================================================
+// BACK BUTTON
+// ======================================================
+
+function goBack() {
+
+  window.location.href =
+    "mentor-dashboard.html";
+
+}
+
+</script>
+
+
+<!-- THEME -->
+
+<script src="../js/theme.js"></script>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <p>
+    © 2026 MentorHub
+  </p>
+
+</footer>
+
+</body>
+
+</html>
