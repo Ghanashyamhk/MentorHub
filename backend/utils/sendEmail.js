@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-
 // ================= SEND VERIFICATION EMAIL =================
 
 const sendVerificationEmail = async (email, token) => {
@@ -55,23 +54,25 @@ const sendVerificationEmail = async (email, token) => {
     });
 };
 
-
 // ================= TEST EMAIL CONNECTION =================
 
-transporter.verify((error, success) => {
+if (process.env.NODE_ENV !== "test") {
 
-    if (error) {
+    transporter.verify((error, success) => {
 
-        console.log("EMAIL CONNECTION FAILED:");
-        console.log(error);
+        if (error) {
 
-    } else {
+            console.log("EMAIL CONNECTION FAILED:");
+            console.log(error);
 
-        console.log("EMAIL SERVER READY");
+        } else {
 
-    }
+            console.log("EMAIL SERVER READY");
 
-});
+        }
 
+    });
+
+}
 
 module.exports = sendVerificationEmail;
