@@ -1,6 +1,6 @@
-const Request = require("../models/Request");
-const Project = require("../models/Project");
-const Notification = require("../models/Notification");
+const Request = require("../models/request");
+const Project = require("../models/project");
+const Notification = require("../models/notification");
 
 // ================= CREATE REQUEST =================
 

@@ -1,5 +1,5 @@
-const Project = require("../models/Project");
-const Request = require("../models/Request");
+const Project = require("../models/project");
+const Request = require("../models/request");
 
 // ======================================================
 // CREATE PROJECT
