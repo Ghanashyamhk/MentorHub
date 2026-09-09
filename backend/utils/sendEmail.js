@@ -6,7 +6,6 @@ const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: Number(process.env.EMAIL_PORT),
     secure: false,
-
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -18,7 +17,7 @@ const transporter = nodemailer.createTransport({
 const sendVerificationEmail = async (email, token) => {
 
     const verificationLink =
-        `http://localhost:5000/api/auth/verify-email?token=${token}`;
+        `${process.env.BACKEND_URL}/api/auth/verify-email?token=${token}`;
 
     await transporter.sendMail({
 
@@ -72,7 +71,6 @@ if (process.env.NODE_ENV !== "test") {
         }
 
     });
-
 }
 
 module.exports = sendVerificationEmail;
