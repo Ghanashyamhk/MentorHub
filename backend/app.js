@@ -33,5 +33,12 @@ app.get("/api/test", (req, res) => {
         message: "API is working"
     });
 });
+// Health Check
+app.get("/api/health", (req, res) => {
+    res.status(200).json({
+        status: "ok",
+        message: "MentorHub backend is healthy"
+    });
+});
 
 module.exports = app;

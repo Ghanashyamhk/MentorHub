@@ -91,3 +91,11 @@ test("POST /api/auth/google should reject a missing credential", async () => {
   assert.strictEqual(response.statusCode, 400);
   assert.strictEqual(response.body.message, "Google credential is required");
 });
+
+test("GET /api/health should return healthy status", async () => {
+    const response = await request(app)
+        .get("/api/health");
+
+    assert.strictEqual(response.statusCode, 200);
+    assert.strictEqual(response.body.status, "ok");
+});
