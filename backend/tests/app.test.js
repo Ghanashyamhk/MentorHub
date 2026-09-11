@@ -60,3 +60,34 @@ test("GET /api/auth/profile should reject unauthenticated request", async () => 
         "Authorization token required"
     );
 });
+
+test("POST /api/auth/register should reject an invalid role", async () => {
+  const response = await request(app)
+    .post("/api/auth/register")
+    .send({
+      name: "Test User",
+      email: "test@example.com",
+      password: "password123",
+      role: "admin"
+    });
+
+  assert.strictEqual(response.statusCode, 400);
+  assert.strictEqual(response.body.message, "Invalid role");
+});
+
+test("GET /api/auth/verify-email should reject a missing token", async () => {
+  const response = await request(app)
+    .get("/api/auth/verify-email");
+
+  assert.strictEqual(response.statusCode, 400);
+  assert.strictEqual(response.text, "Verification token is missing.");
+});
+
+test("POST /api/auth/google should reject a missing credential", async () => {
+  const response = await request(app)
+    .post("/api/auth/google")
+    .send({ role: "student" });
+
+  assert.strictEqual(response.statusCode, 400);
+  assert.strictEqual(response.body.message, "Google credential is required");
+});
