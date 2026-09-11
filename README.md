@@ -1,187 +1,93 @@
-# MentorHub – Mentor–Student Project Discovery Platform
+# MentorHub
 
-MentorHub is a web-based platform that connects students with mentors based on project interests and technical domains.
-
-Students can explore project ideas, send requests to mentors, track request status, receive notifications, view accepted project teams, and communicate with team members through email.
-
-Mentors can publish project ideas, manage student requests, accept or reject students, receive notifications, and view their project teams.
-
----
+MentorHub is a mentor–student platform that helps students discover real-world project opportunities and connect with mentors. Mentors can create projects, manage student requests, and track project members, while students can explore projects and request to join them.
 
 ## Features
 
-### Student Features
+- Student and mentor role-based access
+- User registration and login
+- JWT-based authentication
+- Google Login
+- Email verification for account registration
+- Mentor project creation and management
+- Students can browse projects by domain
+- Student project requests
+- Mentor request acceptance/rejection
+- Project member capacity tracking
+- Notifications for request updates
+- Email-based communication
+- RESTful backend APIs
+- Health-check endpoint for deployment monitoring
 
-* Student registration and login
-* JWT-based authentication
-* Browse project ideas by domain
-* View project details
-* Send requests to mentors
-* Prevent duplicate requests
-* Track request status:
-
-  * Pending
-  * Accepted
-  * Rejected
-* Receive notifications when requests are accepted or rejected
-* View notification unread count
-* View accepted project team members
-* View mentor and student email addresses
-* Contact the project team through email
-* Dark/Light mode
-
-### Mentor Features
-
-* Mentor registration and login
-* JWT-based authentication
-* Add project ideas
-* Select project domain and difficulty
-* Create individual or group projects
-* Set maximum group members
-* View own projects
-* Delete own projects
-* Receive notifications when students request projects
-* View student requests
-* Accept or reject requests
-* Automatic project capacity validation
-* Automatic rejection of pending requests when a project becomes full
-* View accepted project team members
-* Contact the project team through email
-* View notification unread count
-* Dark/Light mode
-
----
-
-## Project Types
-
-### Individual Project
-
-An individual project can have only one accepted student.
-
-### Group Project
-
-A group project can have multiple accepted students, with the mentor defining the maximum number of members.
-
-The backend tracks the number of accepted members and prevents the project from exceeding its maximum capacity.
-
----
-
-## Notification System
-
-MentorHub provides a database-backed notification system.
-
-### Mentor Notifications
-
-Mentors receive a notification when a student requests to join one of their projects.
-
-### Student Notifications
-
-Students receive notifications when:
-
-* Their request is accepted
-* Their request is rejected
-* Their pending request is automatically rejected because the project has reached its capacity
-
-The notification system supports:
-
-* Read/unread status
-* Unread notification count
-* Notification timestamps
-* Notification types
-* Request association
-
----
-
-## Project Team
-
-Once a student is accepted into a project, the student can view the project team.
-
-Team information includes:
-
-* Project
-* Mentor
-* Accepted students
-* Names
-* Email addresses
-* Current team size
-* Maximum team capacity
-
-Only the project's mentor and accepted students can access the team information.
-
----
-
-## Team Communication
-
-MentorHub currently uses email-based communication instead of an internal real-time chat system.
-
-The **Contact Team** feature collects the mentor's and accepted students' email addresses and opens the user's default email application with a pre-filled subject and message.
-
----
-
-## Technology Stack
+## Tech Stack
 
 ### Frontend
-
-* HTML5
-* CSS3
-* JavaScript
-* Fetch API
-* LocalStorage
+- HTML
+- CSS
+- JavaScript
 
 ### Backend
-
-* Node.js
-* Express.js
+- Node.js
+- Express.js
+- REST APIs
 
 ### Database
+- MongoDB
+- MongoDB Atlas
+- Mongoose
 
-* MongoDB
-* Mongoose
+### Authentication & Services
+- JWT
+- bcryptjs
+- Google Identity Services
+- Nodemailer
 
-### Authentication and Security
-
-* JSON Web Token (JWT)
-* Password hashing
-* Authentication middleware
-* Role-based access control
-* Protected API routes
-* Project ownership validation
-* Request ownership validation
-* Project capacity validation
-
----
+### DevOps
+- Git
+- GitHub
+- GitHub Actions
+- Render
 
 ## Architecture
 
-MentorHub follows an **MVC (Model–View–Controller) architecture** with a RESTful Node.js/Express backend and a separate HTML, CSS, and JavaScript frontend.
+```text
+                         ┌──────────────────────┐
+                         │       User           │
+                         │ Student / Mentor     │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │   MentorHub Frontend │
+                         │      HTML/CSS/JS     │
+                         └──────────┬───────────┘
+                                    │ HTTP/REST
+                                    ▼
+                         ┌──────────────────────┐
+                         │   Express.js API     │
+                         │      Node.js         │
+                         └──────────┬───────────┘
+                                    │
+                 ┌──────────────────┼──────────────────┐
+                 ▼                  ▼                  ▼
+        ┌────────────────┐  ┌────────────────┐  ┌────────────────┐
+        │ Authentication │  │ Project/Request│  │ Notifications  │
+        │   & JWT        │  │    APIs        │  │     APIs       │
+        └────────────────┘  └────────────────┘  └────────────────┘
+                 │                  │                  │
+                 └──────────────────┼──────────────────┘
+                                    ▼
+                         ┌──────────────────────┐
+                         │    MongoDB Atlas     │
+                         └──────────────────────┘
+```
+
+The Express server also serves the frontend as static files, so the deployed application runs from a single Render web service.
+
+## Project Structure
 
 ```text
 MentorHub/
-│
-├── frontend/
-│   ├── index.html
-│   ├── login.html
-│   ├── signup.html
-│   │
-│   ├── pages/
-│   │   ├── student-dashboard.html
-│   │   ├── mentor-dashboard.html
-│   │   ├── project-list.html
-│   │   └── add-project.html
-│   │
-│   ├── css/
-│   │   ├── style.css
-│   │   ├── auth.css
-│   │   ├── dashboard.css
-│   │   └── chat.css
-│   │
-│   └── js/
-│       ├── auth.js
-│       ├── dashboard.js
-│       ├── mentor.js
-│       ├── projects.js
-│       └── chat.js
-│
 ├── backend/
 │   ├── config/
 │   ├── controllers/
@@ -189,442 +95,253 @@ MentorHub/
 │   ├── models/
 │   ├── routes/
 │   ├── utils/
+│   ├── tests/
+│   ├── .env
+│   ├── .env.example
+│   ├── app.js
 │   ├── server.js
 │   ├── package.json
-│   └── .env
+│   └── package-lock.json
 │
-├── .env.example
+├── frontend/
+│   ├── js/
+│   └── ...
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
 ├── .gitignore
 └── README.md
 ```
 
-### MVC Components
+## Running Locally
 
-* **Model** – Mongoose models responsible for MongoDB data structures.
-* **View** – HTML/CSS/JavaScript frontend that provides the user interface.
-* **Controller** – Contains the business logic for authentication, projects, requests, notifications, and team management.
-* **Routes** – Defines REST API endpoints and connects requests to controllers.
-* **Middleware** – Handles JWT authentication and access control.
-
-### Application Flow
-
-```text
-Frontend
-   ↓
-REST API Routes
-   ↓
-Controllers
-   ↓
-Models
-   ↓
-MongoDB
-```
-
----
-
-## Application Flow
-
-### Student Flow
-
-```text
-Register / Login
-       ↓
-Student Dashboard
-       ↓
-Select Domain
-       ↓
-Browse Projects
-       ↓
-View Project
-       ↓
-Request Mentor
-       ↓
-Pending
-       ↓
-Mentor Accepts / Rejects
-       ↓
-Notification
-       ↓
-Accepted
-       ↓
-View Project Team
-       ↓
-Contact Team
-```
-
-### Mentor Flow
-
-```text
-Register / Login
-       ↓
-Mentor Dashboard
-       ↓
-Select Domain
-       ↓
-Add Project Idea
-       ↓
-Project Stored in MongoDB
-       ↓
-Student Sends Request
-       ↓
-Mentor Notification
-       ↓
-View Requests
-       ↓
-Accept / Reject
-       ↓
-Student Notification
-       ↓
-View Accepted Team
-       ↓
-Contact Team
-```
-
----
-
-## Security
-
-MentorHub implements security at multiple levels.
-
-### JWT Authentication
-
-Protected APIs require:
-
-```text
-Authorization: Bearer <token>
-```
-
-The backend verifies the JWT through authentication middleware.
-
-### Role-Based Access Control
-
-The platform supports two roles:
-
-```text
-Student
-Mentor
-```
-
-Each role has different permissions.
-
-For example:
-
-* Students can request projects.
-* Mentors can create projects.
-* Only mentors can manage requests for their projects.
-* Only accepted students and the project's mentor can view the team.
-
-### Project Ownership
-
-Mentors can manage only their own projects.
-
-### Request Ownership
-
-Only the mentor associated with a project can accept or reject requests for that project.
-
-### Team Access
-
-Only the project's mentor and accepted students can view the project team.
-
-### Capacity Validation
-
-The backend validates project capacity before accepting a request.
-
-```text
-Individual Project
-Maximum accepted students = 1
-
-Group Project
-Maximum accepted students = maxMembers
-```
-
----
-
-## Database Models
-
-The application uses MongoDB with Mongoose.
-
-```text
-User
-Project
-Request
-Notification
-```
-
-### User
-
-Stores:
-
-* Name
-* Email
-* Password
-* Role
-
-### Project
-
-Stores:
-
-* Domain
-* Title
-* Description
-* Difficulty
-* Contact
-* Mentor
-* Project type
-* Maximum members
-
-### Request
-
-Stores:
-
-* Student
-* Project
-* Mentor
-* Status
-* Created date
-* Updated date
-
-Request statuses:
-
-```text
-pending
-accepted
-rejected
-```
-
-### Notification
-
-Stores:
-
-* Recipient
-* Message
-* Notification type
-* Related request
-* Read/unread status
-* Created date
-
----
-
-## API Structure
-
-The backend exposes REST APIs under:
-
-```text
-/api
-```
-
-### Authentication
-
-```text
-/api/auth
-```
-
-Handles:
-
-* Registration
-* Login
-* Authentication-related operations
-
-### Projects
-
-```text
-/api/projects
-```
-
-Handles:
-
-* Creating projects
-* Getting projects
-* Getting mentor's projects
-* Deleting projects
-* Project-related operations
-
-### Requests
-
-```text
-/api/requests
-```
-
-Handles:
-
-* Creating student requests
-* Getting student requests
-* Getting mentor requests
-* Accepting requests
-* Rejecting requests
-* Getting project team members
-
-### Notifications
-
-```text
-/api/notifications
-```
-
-Handles:
-
-* Getting notifications
-* Getting unread notification count
-* Marking notifications as read
-
----
-
-## Installation
-
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd mentorProject
+git clone <your-github-repository-url>
+cd MentorHub
 ```
 
-### 2. Install Backend Dependencies
+### 2. Install backend dependencies
 
 ```bash
 cd backend
-npm install
+npm ci
 ```
 
-### 3. Configure Environment Variables
+### 3. Configure environment variables
 
-Create a `.env` file inside the `backend` directory:
+Create a `.env` file inside `backend/` using `.env.example` as a template.
+
+Required configuration includes:
 
 ```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
+BACKEND_URL=http://localhost:5000
 JWT_SECRET=your_jwt_secret
 
 EMAIL_HOST=your_email_host
 EMAIL_PORT=your_email_port
-EMAIL_USER=your_email_username
-EMAIL_PASSWORD=your_email_password
+EMAIL_USER=your_email_address
+EMAIL_PASS=your_email_password_or_app_password
 
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
-Never upload the `.env` file to GitHub.
+Do not commit the real `.env` file or any credentials to GitHub.
 
-Use `.env.example` to show the required environment variables without exposing actual credentials.
-
-### 4. Start the Backend
+### 4. Start the application
 
 ```bash
 npm start
 ```
 
-or:
+The application runs locally on:
+
+```text
+http://localhost:5000
+```
+
+## API Overview
+
+The backend exposes REST API routes under:
+
+```text
+/api/auth
+/api/projects
+/api/requests
+/api/notifications
+```
+
+A basic API test endpoint is available at:
+
+```text
+GET /api/test
+```
+
+The health-check endpoint is:
+
+```text
+GET /api/health
+```
+
+Expected health response:
+
+```json
+{
+  "status": "ok",
+  "message": "MentorHub backend is healthy"
+}
+```
+
+## Authentication
+
+MentorHub uses JWT for authenticated API access.
+
+The authentication flow is:
+
+```text
+Login / Google Login
+        ↓
+Backend validates credentials
+        ↓
+JWT generated
+        ↓
+Client uses JWT for protected requests
+        ↓
+Authentication middleware verifies JWT
+        ↓
+Protected API resource
+```
+
+Role information is included in the authenticated user data so that mentor- and student-specific operations can be controlled.
+
+## Email Verification
+
+For normal registration, the backend generates an email verification token and sends a verification email using Nodemailer.
+
+The verification link is generated from the configured `BACKEND_URL`.
+
+## Testing
+
+The backend contains automated API validation tests using Node's test runner and Supertest.
+
+Run:
 
 ```bash
-node server.js
+npm test
 ```
 
-The backend runs on:
+Current CI validation includes **8 passing tests**, covering:
 
-```text
-http://localhost:5000
-```
-
-### 5. Open the Application
-
-```text
-http://localhost:5000
-```
-
----
-
-## API Testing
-
-The backend REST APIs were tested independently using Postman before integrating them with the frontend.
-
----
-
-## Challenges and Solutions
-
-### Duplicate Requests
-
-**Problem:**
-A student could send multiple requests for the same project.
-
-**Solution:**
-The backend checks whether a request already exists for the same student and project before creating a new request.
-
-### Group Capacity
-
-**Problem:**
-A group project should not exceed its maximum number of members.
-
-**Solution:**
-The backend counts only accepted requests and compares the count with `maxMembers`.
-
-### Request Security
-
-**Problem:**
-A mentor should not be able to manage requests belonging to another mentor.
-
-**Solution:**
-The backend verifies that the request belongs to the logged-in mentor before accepting or rejecting it.
-
-### Project Security
-
-**Problem:**
-A mentor should not be able to modify or delete another mentor's project.
-
-**Solution:**
-Project ownership is validated on protected backend routes.
-
-### Notifications
-
-**Problem:**
-Students and mentors need to know when important request events occur.
-
-**Solution:**
-A dedicated Notification model stores notifications in MongoDB.
-
-### Team Communication
-
-**Problem:**
-A real-time chat system adds additional backend and infrastructure complexity.
-
-**Solution:**
-The current implementation uses email-based team communication through `mailto:` links.
-
----
-
-## Future Enhancements
-
-* Real-time chat using Socket.IO
-* Google Authentication
-* Advanced mentor search
-* Mentor recommendation system
-* Project search and filtering
-* Student skill profiles
-* Mentor ratings and reviews
-* Project progress tracking
-* Team workspace
-* File sharing
-* Email notifications
-* Admin dashboard
-* Advanced analytics
-
----
-
-## Project Status
-
-**Active Development**
-
-Current functionality includes:
-
-* Authentication
-* Role-based access control
-* Project management
-* Student requests
-* Request acceptance/rejection
-* Project capacity management
-* Notifications
-* Team member management
-* Email-based team communication
-* MongoDB persistence
-
+- API availability
+- Health check
+- Registration validation
+- Login validation
+- Protected profile access
+- Role validation
+- Email verification token validation
+- Google authentication credential validation
 
 ## CI/CD
-Automated testing and deployment using GitHub Actions and Render.
+
+GitHub Actions is used to automatically validate changes pushed to the repository.
+
+Current workflow:
+
+```text
+Git Push
+   ↓
+GitHub Actions
+   ↓
+Install dependencies
+   ↓
+Run automated tests
+   ↓
+Successful build/check
+   ↓
+Render deployment
+   ↓
+Live MentorHub application
+```
+
+The project uses a Render Web Service for deployment.
+
+## Deployment
+
+MentorHub is deployed on Render.
+
+Live application:
+
+https://mentorhub-8cbu.onrender.com
+
+The deployed service uses:
+
+```text
+Build Command: npm ci
+Start Command: npm start
+Root Directory: backend
+```
+
+MongoDB Atlas is used as the cloud database.
+
+Environment variables and secrets are configured through the deployment platform rather than stored in the repository.
+
+## Reliability
+
+The backend includes:
+
+- Request validation
+- Authentication checks
+- Role and ownership checks
+- HTTP status codes for client/server errors
+- `try/catch` error handling in controllers
+- Health-check endpoint
+- Production logs through the deployment platform
+
+## Security Practices
+
+- JWT secret stored as an environment variable
+- Database credentials stored as environment variables
+- Email credentials stored as environment variables
+- Google OAuth credentials stored as environment variables
+- `.env` files excluded through `.gitignore`
+- `.env.example` contains only placeholder values
+
+## DevOps Workflow
+
+The project follows a basic DevOps workflow:
+
+```text
+Develop
+   ↓
+Git
+   ↓
+GitHub
+   ↓
+GitHub Actions
+   ↓
+Automated API Tests
+   ↓
+Render
+   ↓
+Production
+```
+
+This allows code changes to be version-controlled, automatically tested, and deployed to the live environment.
+
+## Future Improvements
+
+Possible future improvements include:
+
+- More comprehensive automated test coverage
+- More detailed application monitoring
+- Improved production security configuration
+- Containerization with Docker
+- Additional CI/CD quality gates
+
+![MentorHub Architecture](architecture.png)
