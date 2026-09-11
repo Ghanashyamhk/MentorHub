@@ -624,3 +624,7 @@ Current functionality includes:
 * Team member management
 * Email-based team communication
 * MongoDB persistence
+
+
+## CI/CD
+Automated testing and deployment using GitHub Actions and Render.
